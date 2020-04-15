@@ -28,6 +28,9 @@ class OffersRepository(val retrofitAPI: RetrofitAPI, val offersDao: OffersDao,va
     fun getOffers(forceRefresh:Boolean) : LiveData<Resource<List<Offer>>>{
         return object : NetworkBoundResource<List<Offer>, OfferResponse>(appExecutors) {
             override fun saveCallResult(item: OfferResponse) {
+                //clear db in order to keep the newest data
+                offersDao.clearOffers()
+                
                 //filtering the list before inserting to local db
                 val offers = item.offers.filter { offer -> offer.price.amount in 50.0..1000.0}
                 offersDao.insertOffers(offers)
