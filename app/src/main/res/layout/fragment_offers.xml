@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.allegrointernship.models.Offer"/>
+        <import type="com.example.allegrointernship.models.Resource" />
+        <import type="com.example.allegrointernship.models.Resource.Status" />
+        <import type="androidx.lifecycle.LiveData"/>
+        <import type="java.util.List"/>
+
+        <variable
+            name="offers"
+            type="LiveData&lt;Resource&lt;List&lt;Offer>>>" />
+        <variable
+            name="forceRefreshCallback"
+            type="com.example.allegrointernship.util.ForceRefreshCallback" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/offers_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/offers_swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onRefreshListener="@{() -> forceRefreshCallback.forceRefresh()}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/offers_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:context="com.example.allegrointernship.MainActivity"
+                tools:listitem="@layout/item_offers_list">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            layout="@layout/loading_state"
+            app:resource="@{(Resource) offers}"
+            app:emptyElement="@{offers.data.size() == 0 || offers.data == null}"
+            app:callback="@{() -> forceRefreshCallback.forceRefresh()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

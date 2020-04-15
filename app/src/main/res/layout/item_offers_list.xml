@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="offer"
+            type="com.example.allegrointernship.models.Offer" />
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/item_offers_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{onClickListener}">
+
+        <ImageView
+            android:id="@+id/item_offers_photo"
+            app:imageUrl ="@{offer.thumbnailUrl}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/lego">
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="10dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/item_offers_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{offer.name}"
+                android:textSize="20sp">
+            </com.google.android.material.textview.MaterialTextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/item_offers_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text='@{String.format("%.2f",offer.price.amount).toString()}'>
+
+                </com.google.android.material.textview.MaterialTextView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/item_offers_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="@{offer.price.currency}">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Sklep Allegro</string>
+
+    <string name="price">cena:</string>
+    <string name="retry">Spróbuj ponownie</string>
+    <string name="unknown_error">Nieznany błąd></string>
+    <string name="internet_problem_title">Wystąpił problem z połączeniem internetowym</string>
+    <string name="internet_problem_message">Nie udało się pobrać danych z powodu braku połączenia internetowego!</string>
+    <string name="no_internet_error_message_start">Unable to resolve host</string>
+    <string name ="ok">OK</string>
+
+</resources>
