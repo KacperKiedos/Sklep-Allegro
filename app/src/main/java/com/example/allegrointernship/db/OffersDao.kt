@@ -15,4 +15,7 @@ interface OffersDao {
 
     @Query("SELECT * FROM offers ORDER BY amount")
     fun getOffers() : LiveData<List<Offer>>
+    
+    @Query("DELETE FROM offers")
+    fun clearOffers()
 }
